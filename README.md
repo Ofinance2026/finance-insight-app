@@ -1,19 +1,37 @@
-# 🎈 Blank app template
+import streamlit as st
 
-A simple Streamlit app template for you to modify!
+import pandas as pd
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+import numpy as np
 
-### How to run it on your own machine
+st.title("💰 Finance Insights Dashboard")
 
-1. Install the requirements
+# Sample data
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
 
-2. Run the app
+income = [3000, 3200, 3100, 4000, 4200, 4500]
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+expenses = [2500, 2600, 2400, 3000, 3100, 3300]
+
+df = pd.DataFrame({
+
+    "Month": months,
+
+    "Income": income,
+
+    "Expenses": expenses
+
+})
+
+st.subheader("Income vs Expenses")
+
+st.line_chart(df.set_index("Month"))
+
+st.subheader("Summary")
+
+st.write(df)
+
+net = sum(income) - sum(expenses)
+
+st.metric("Net Savings (6 months)", f"${net}")
